@@ -1,5 +1,6 @@
 // 定义最大的屏幕宽度
-const MAX_FONT_SIZE = 420
+// const MAX_SCREEN_WIDTH = 420
+const MAX_FONT_SIZE = 75
 
 document.addEventListener('DOMContentLoaded', () => {
   const html = document.querySelector('html')
