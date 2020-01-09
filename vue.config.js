@@ -11,7 +11,7 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   filenameHashing: true,
-  lintOnSave: true,
+  lintOnSave: false, // 关闭eslint
   runtimeCompiler: false,
   transpileDependencies: [/\/node_modules\/vue-echarts\//, /\/node_modules\/resize-detector\//],
   productionSourceMap: false,
@@ -45,9 +45,10 @@ module.exports = {
           /* postcss配置
           * 技巧：不转换成rem
           * px检测区分大小写，也就是说Px/PX/pX不会被转换，可以用这个方式避免转换成rem
+          * 缺点: 最小字体12px,无法设置小于12px的字体
           *  */
           pxtorem({
-            rootValue: 37.5, // html节点预设的font-size大小,若设计稿尺寸为375则设置37.5;若为750则设置为75
+            rootValue: 75, // html节点预设的font-size大小,若设计稿尺寸为375则设置37.5;若为750则设置为75
             propList: ['*'], // 指定转换成rem的属性, * 表示全部转换
             unitPrecision: 5, // 将rem精确到小数点后5位
             selectorBlackList: [], // str/reg 指定不转换的选择器, str时包含字段即匹配

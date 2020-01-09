@@ -10,7 +10,7 @@ import '@/assets/styles/index.scss'
 // 适应屏幕宽度
 import '@/utils/adapt.js'
 // 引入全局组件
-// import './global.js'
+import './global.js'
 
 Vue.config.productionTip = false
 
