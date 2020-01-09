@@ -1,34 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view v-if="isRouterAlive"/>
   </div>
 </template>
-
-<style lang="scss" scoped>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-  }
-
-  #nav {
-    padding: 30px;
-
-    a {
-      font-size: 22px;
-      font-weight: bold;
-      color: $color-orange;
-
-      &.router-link-exact-active {
-        color: #42b983;
+<script>
+  export default {
+    data() {
+      return {
+        isRouterAlive: true, //首页刷新
       }
+    },
+    provide() {
+      return {
+        reload: this.reload
+      };
+    },
+    methods: {
+      /**
+       * @method reload   页面组件刷新
+       * @description     使用时,inject: ["reload"],调用时this.reload()
+       */
+      reload() {
+        this.isRouterAlive = false;
+        this.$nextTick(() => this.isRouterAlive = true);
+      },
     }
   }
-</style>
+</script>
