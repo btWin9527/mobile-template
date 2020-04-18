@@ -37,6 +37,7 @@ module.exports = {
       sass: {
         prependData: `
         @import "@/assets/styles/variables.scss";
+        @import "@/assets/styles/adapt.scss";
         `
       },
       postcss: {
@@ -47,7 +48,7 @@ module.exports = {
           * px检测区分大小写，也就是说Px/PX/pX不会被转换，可以用这个方式避免转换成rem
           * 缺点: 最小字体12px,无法设置小于12px的字体
           *  */
-          pxtorem({
+       /*   pxtorem({
             rootValue: 75, // html节点预设的font-size大小,若设计稿尺寸为375则设置37.5;若为750则设置为75
             propList: ['*'], // 指定转换成rem的属性, * 表示全部转换
             unitPrecision: 5, // 将rem精确到小数点后5位
@@ -55,7 +56,7 @@ module.exports = {
             replace: true,
             mediaQuery: false, // 媒体查询内的px是否转换
             minPixelValue: 0 // 小于指定数值的px不转换
-          })
+          })*/
         ]
       }
     }

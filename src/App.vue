@@ -27,3 +27,9 @@
     }
   }
 </script>
+<style scoped lang="scss">
+  #app {
+    min-height: 100%;
+    background-color: goldenrod;
+  }
+</style>
