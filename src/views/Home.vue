@@ -1,7 +1,10 @@
 <template>
   <!-- 测试scroll组件 -->
   <div>
-    <Scroll ref="scrollContent">
+    <Scroll
+      :pullDown="pullDown"
+      :pullUp="pullUp"
+      ref="scrollContent">
       <div class="home">
         <!-- 测试移动端适配情况 -->
         <div>
@@ -22,7 +25,6 @@
         <p> vuex中的test状态：{{ testState }}</p>
 
         <!-- 测试scroll -->
-
         <div
           class="scrollList"
           v-for="(item,index) in scrollArr" :key="index"
@@ -43,7 +45,8 @@ export default {
   name: 'home',
   data() {
     return {
-      scrollArr: []
+      scrollArr: [],
+      num: 0
     }
   },
   components: {
@@ -65,11 +68,26 @@ export default {
     async getData() {
       this.scrollArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       await this.$refs.scrollContent.initScroll();
-      let bscroll = this.$refs.scrollContent.getBScroll();
-      bscroll.refresh();
       setTimeout(() => {
         this.$refs.scrollContent.scrollRefresh();
-      }, 1000)
+      }, 60)
+    },
+    /* 下拉刷新 */
+    pullDown() {
+      this.scrollArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      setTimeout(() => {
+        this.$refs.scrollContent.scrollRefresh();
+      }, 60)
+    },
+    /* 上拉加载 */
+    pullUp() {
+      this.num++;
+      console.log( this.num,' this.num')
+      if (this.num >= 3) return;
+      this.scrollArr.push(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+      setTimeout(() => {
+        this.$refs.scrollContent.scrollRefresh();
+      }, 60)
     }
   },
 }

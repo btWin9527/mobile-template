@@ -1,7 +1,9 @@
 <template>
   <div ref="scroll" class="wrapper">
     <div class="content">
+      <div>上拉动画</div>
       <slot></slot>
+      <div>下拉动画</div>
     </div>
   </div>
 </template>
@@ -60,7 +62,7 @@ export default {
   },
   methods: {
     /* 初始化scroll组件 */
-    initScroll() {
+    async initScroll() {
       const scrollRef = this.$refs.scroll;
       /*
       * better-scroll配置项
@@ -69,7 +71,7 @@ export default {
       * probeType  0 不派发scroll事件, 1 会非实时（屏幕滑动超过一定时间后）派发scroll 事件, 2 会在屏幕滑动的过程中实时的派发 scroll 事件 3 不仅在屏幕滑动的过程中，而且在 momentum 滚动动画运行过程中实时派发 scroll 事件
       * bounce  当滚动超过边缘的时候会有一小段回弹动画 {top: ture,bottom:true,left:true,right:true}
       * */
-      this.bScroll = new BScroll(scrollRef, {
+      this.bScroll = await new BScroll(scrollRef, {
         scrollX: this.direction === 'horizental',
         scrollY: this.direction === 'vertical',
         probeType: 3,
@@ -79,10 +81,9 @@ export default {
           bottom: this.bounceBottom
         }
       });
-      this.watchScrollEvent();
-      this.watchPullDownEvent();
-      this.watchPullUpEvent();
-      console.log('初始化完成')
+      await this.watchScrollEvent();
+      await this.watchPullDownEvent();
+      await this.watchPullUpEvent();
     },
     /* 监听scroll事件 */
     watchScrollEvent() {
@@ -122,9 +123,8 @@ export default {
     /* 外部抛出refresh事件 */
     scrollRefresh() {
       if (this.bScroll) {
-        console.log('刷新scroll')
         this.bScroll.refresh();
-        this.bScroll.scrollTo(0, 0);
+        // this.bScroll.scrollTo(0, 0);
       }
     },
     // 给外界暴露 getBScroll 方法，提供 bs 实例
